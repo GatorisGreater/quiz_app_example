@@ -46,20 +46,23 @@ const state = {
   feedbackRandom: 0
 };
 
+// destructure the state Object
+let { questions, praises, admonishments, score, currentQuestionIndex, route, lastAnswerCorrect, feedbackRandom } = state;
+
 // State modification functions
 const setRoute = (state, route) => state.route = route;
 
 const resetGame = (state) => {
-  state.score = 0;
-  state.currentQuestionIndex = 0;
+  score = 0;
+  currentQuestionIndex = 0;
   setRoute(state, 'start');
 };
 
 const answerQuestion = (state, answer) => {
-  let currentQuestion = state.questions[state.currentQuestionIndex];
-  state.lastAnswerCorrect = currentQuestion.correctChoiceIndex === answer;
-  if (state.lastAnswerCorrect) {
-    state.score++;
+  let currentQuestion = questions[currentQuestionIndex];
+  lastAnswerCorrect = currentQuestion.correctChoiceIndex === answer;
+  if (lastAnswerCorrect) {
+    score++;
   }
   selectFeedback(state);
   setRoute(state, 'answer-feedback');
